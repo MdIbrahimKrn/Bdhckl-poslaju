@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Office Search</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #searchBox {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+            position: sticky;
+            top: 0;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        .availability {
+            font-weight: bold;
+        }
+        .available {
+            color: green;
+        }
+        .full {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Post Office Search</h1>
+    <input type="text" id="searchBox" placeholder="Search by post office name, postcode or location..." onkeyup="searchTable()">
+    
+    <table id="postOfficeTable">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Post Office Name</th>
+                <th>Postcode</th>
+                <th>Capacity</th>
+                <th>Booked</th>
+                <th>Available</th>
+                <th>Availability</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>PEJABAT POS BESAR PULAU PINANG (GPO)</td>
+                <td>10670</td>
+                <td>100</td>
+                <td>31</td>
+                <td>69</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>PEJABAT POS BESAR IPOH (GPO)</td>
+                <td>30670</td>
+                <td>70</td>
+                <td>19</td>
+                <td>51</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>PEJABAT POS BESAR KUCHING (GPO)</td>
+                <td>93670</td>
+                <td>30</td>
+                <td>0</td>
+                <td>30</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>PEJABAT POS MUAR  (PO)</td>
+                <td>84000</td>
+                <td>50</td>
+                <td>0</td>
+                <td>50</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>PEJABAT POS BESAR KUALA TERENGGANU (GPO)</td>
+                <td>20670</td>
+                <td>30</td>
+                <td>2</td>
+                <td>28</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>PEJABAT POS BESAR KUALA LUMPUR  (GPO)</td>
+                <td>50670</td>
+                <td>100</td>
+                <td>11</td>
+                <td>89</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>PEJABAT POS JINJANG (PO)</td>
+                <td>52000</td>
+                <td>50</td>
+                <td>2</td>
+                <td>48</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>PEJABAT POS SUNGAI WANG PLAZA  (PO)</td>
+                <td>50250</td>
+                <td>70</td>
+                <td>2</td>
+                <td>68</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>PEJABAT POS BESAR SHAH ALAM (GPO)</td>
+                <td>40670</td>
+                <td>100</td>
+                <td>13</td>
+                <td>87</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>11</td>
+                <td>PEJABAT POS BANDAR  BARU BANGI  (PO)</td>
+                <td>43650</td>
+                <td>30</td>
+                <td>5</td>
+                <td>25</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>12</td>
+                <td>PEJABAT POS KAJANG 2020 (PO)</td>
+                <td>43000</td>
+                <td>50</td>
+                <td>9</td>
+                <td>41</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>13</td>
+                <td>PEJABAT POS RAWANG (PO)</td>
+                <td>48000</td>
+                <td>50</td>
+                <td>8</td>
+                <td>42</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>14</td>
+                <td>PEJABAT POS KLANG (PO)</td>
+                <td>41670</td>
+                <td>70</td>
+                <td>16</td>
+                <td>54</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>15</td>
+                <td>PEJABAT POS BESAR MELAKA (GPO)</td>
+                <td>75670</td>
+                <td>70</td>
+                <td>9</td>
+                <td>61</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>16</td>
+                <td>PEJABAT POS TANGKAK  (PO)</td>
+                <td>84900</td>
+                <td>50</td>
+                <td>10</td>
+                <td>40</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>17</td>
+                <td>PEJABAT POS BESAR SEREMBAN (GPO)</td>
+                <td>70000</td>
+                <td>50</td>
+                <td>11</td>
+                <td>39</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>18</td>
+                <td>PEJABAT POS Kompleks Lada Langkawi</td>
+                <td>07000</td>
+                <td>30</td>
+                <td>4</td>
+                <td>26</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>19</td>
+                <td>PEJABAT POS BESAR Alor Setar</td>
+                <td>05670</td>
+                <td>50</td>
+                <td>3</td>
+                <td>47</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>20</td>
+                <td>PEJABAT POS Sungai Petani</td>
+                <td>08000</td>
+                <td>50</td>
+                <td>3</td>
+                <td>47</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>21</td>
+                <td>PEJABAT POS Bukit Mertajam</td>
+                <td>14000</td>
+                <td>100</td>
+                <td>26</td>
+                <td>74</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>22</td>
+                <td>PEJABAT POS Langkap</td>
+                <td>36700</td>
+                <td>20</td>
+                <td>1</td>
+                <td>19</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>23</td>
+                <td>PEJABAT POS Tanah Rata (Cameron Highlands)</td>
+                <td>39000</td>
+                <td>80</td>
+                <td>4</td>
+                <td>76</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>24</td>
+                <td>PEJABAT POS Seri Kembangan</td>
+                <td>43300</td>
+                <td>50</td>
+                <td>5</td>
+                <td>45</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>25</td>
+                <td>PEJABAT POS Puchong Perdana</td>
+                <td>47100</td>
+                <td>50</td>
+                <td>6</td>
+                <td>44</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>26</td>
+                <td>PEJABAT POS Subang Jaya(SS 15)</td>
+                <td>47500</td>
+                <td>50</td>
+                <td>1</td>
+                <td>49</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>27</td>
+                <td>PEJABAT POS Pudu</td>
+                <td>55100</td>
+                <td>70</td>
+                <td>1</td>
+                <td>69</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>28</td>
+                <td>PEJABAT POS Spectrum Shopping Mall Ampang</td>
+                <td>68000</td>
+                <td>70</td>
+                <td>3</td>
+                <td>67</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>29</td>
+                <td>PEJABAT POS Batu Caves</td>
+                <td>68100</td>
+                <td>50</td>
+                <td>1</td>
+                <td>49</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>30</td>
+                <td>PEJABAT POS Nilai</td>
+                <td>71800</td>
+                <td>30</td>
+                <td>18</td>
+                <td>12</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>31</td>
+                <td>PEJABAT POS BESAR Kuantan</td>
+                <td>25670</td>
+                <td>30</td>
+                <td>16</td>
+                <td>14</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>32</td>
+                <td>PEJABAT POS BESAR         Kota Bharu</td>
+                <td>15670</td>
+                <td>30</td>
+                <td>3</td>
+                <td>27</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>33</td>
+                <td>PEJABAT POS Gua Musang</td>
+                <td>18300</td>
+                <td>20</td>
+                <td>1</td>
+                <td>19</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>34</td>
+                <td>PEJABAT POS BESAR         Kota Kinabalu</td>
+                <td>88670</td>
+                <td>10</td>
+                <td>0</td>
+                <td>10</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>35</td>
+                <td>PEJABAT POS   Klang Utara</td>
+                <td>41300</td>
+                <td>50</td>
+                <td>17</td>
+                <td>33</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>36</td>
+                <td>PEJABAT POS BATU PAHAT</td>
+                <td>83000</td>
+                <td>50</td>
+                <td>13</td>
+                <td>37</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>37</td>
+                <td>PEJABAT POS KANGAR</td>
+                <td>01000</td>
+                <td>20</td>
+                <td>0</td>
+                <td>20</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>38</td>
+                <td>PEJABAT POS PUSAT MEL JOHOR BAHRU</td>
+                <td>80350</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="availability full">Full</td>
+            </tr>
+            <tr>
+                <td>40</td>
+                <td>PEJABAT POS KAPAR</td>
+                <td>42200</td>
+                <td>50</td>
+                <td>43</td>
+                <td>7</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>41</td>
+                <td>PEJABAT POS KUALA SELANGOR</td>
+                <td>45000</td>
+                <td>30</td>
+                <td>0</td>
+                <td>30</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>42</td>
+                <td>PEJABAT POS MIRI</td>
+                <td>98000</td>
+                <td>10</td>
+                <td>0</td>
+                <td>10</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>43</td>
+                <td>PEJABAT POS TELOK INTAN</td>
+                <td>36000</td>
+                <td>30</td>
+                <td>4</td>
+                <td>26</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>44</td>
+                <td>PEJABAT POS SETIAWAN</td>
+                <td>32000</td>
+                <td>30</td>
+                <td>0</td>
+                <td>30</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>45</td>
+                <td>PEJABAT POS TAIPING</td>
+                <td>34000</td>
+                <td>30</td>
+                <td>8</td>
+                <td>22</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>47</td>
+                <td>PEJABAT POS SEGAMAT</td>
+                <td>85000</td>
+                <td>50</td>
+                <td>1</td>
+                <td>49</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>48</td>
+                <td>PEJABAT POS KLUANG</td>
+                <td>86000</td>
+                <td>50</td>
+                <td>14</td>
+                <td>36</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>49</td>
+                <td>PEJABAT POS MERSING</td>
+                <td>86800</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="availability full">Full</td>
+            </tr>
+            <tr>
+                <td>50</td>
+                <td>PEJABAT POS PONTIAN</td>
+                <td>82000</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="availability full">Full</td>
+            </tr>
+            <tr>
+                <td>51</td>
+                <td>PEJABAT POS KULAI</td>
+                <td>81000</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="availability full">Full</td>
+            </tr>
+            <tr>
+                <td>52</td>
+                <td>PEJABAT POS ALOR GAJAH</td>
+                <td>78000</td>
+                <td>50</td>
+                <td>1</td>
+                <td>49</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>53</td>
+                <td>PEJABAT POS JASIN</td>
+                <td>77000</td>
+                <td>30</td>
+                <td>0</td>
+                <td>30</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>54</td>
+                <td>PEJABAT POS GEMENCHEH</td>
+                <td>73200</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="availability full">Full</td>
+            </tr>
+            <tr>
+                <td>55</td>
+                <td>PEJABAT POS TAMAN GEMBIRA, JOHOR BAHRU</td>
+                <td>81200</td>
+                <td>200</td>
+                <td>75</td>
+                <td>125</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>56</td>
+                <td>PEJABAT POS SIMPANG PERTANG</td>
+                <td>72300</td>
+                <td>20</td>
+                <td>0</td>
+                <td>20</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>57</td>
+                <td>PEJABAT POS TEMERLOH</td>
+                <td>28000</td>
+                <td>20</td>
+                <td>0</td>
+                <td>20</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>58</td>
+                <td>PEJABAT POS KUALA LIPIS</td>
+                <td>27200</td>
+                <td>20</td>
+                <td>0</td>
+                <td>20</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>59</td>
+                <td>PEJABAT POS RAUB</td>
+                <td>27600</td>
+                <td>20</td>
+                <td>0</td>
+                <td>20</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>60</td>
+                <td>PEJABAT POS JERANTUT</td>
+                <td>27000</td>
+                <td>30</td>
+                <td>1</td>
+                <td>29</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>61</td>
+                <td>PEJABAT POS BENTONG</td>
+                <td>28700</td>
+                <td>30</td>
+                <td>0</td>
+                <td>30</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>62</td>
+                <td>PEJABAT POS PEKAN</td>
+                <td>26600</td>
+                <td>30</td>
+                <td>0</td>
+                <td>30</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>63</td>
+                <td>PEJABAT POS NIBONG TEBAL</td>
+                <td>14300</td>
+                <td>30</td>
+                <td>2</td>
+                <td>28</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>64</td>
+                <td>PEJABAT POS KEPALA BATAS</td>
+                <td>06200</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="availability full">Full</td>
+            </tr>
+            <tr>
+                <td>65</td>
+                <td>PEJABAT POS TAWAU SABAH</td>
+                <td>91000</td>
+                <td>20</td>
+                <td>0</td>
+                <td>20</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>66</td>
+                <td>PEJABAT POS KELANA JAYA</td>
+                <td>47301</td>
+                <td>50</td>
+                <td>0</td>
+                <td>50</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>67</td>
+                <td>PEJABAT POS BANTING</td>
+                <td>42700</td>
+                <td>20</td>
+                <td>3</td>
+                <td>17</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>68</td>
+                <td>PEJABAT POS KOMPLEKS SUNGAI BULOH</td>
+                <td>47000</td>
+                <td>50</td>
+                <td>5</td>
+                <td>45</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>69</td>
+                <td>PEJABAT POS CHUKAI</td>
+                <td>24000</td>
+                <td>20</td>
+                <td>0</td>
+                <td>20</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>70</td>
+                <td>PEJABAT POS AJIL</td>
+                <td>21800</td>
+                <td>20</td>
+                <td>0</td>
+                <td>20</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>71</td>
+                <td>PEJABAT POS KETENGAH JAYA</td>
+                <td>23300</td>
+                <td>30</td>
+                <td>0</td>
+                <td>30</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>72</td>
+                <td>PEJABAT POS KUALA BESUT</td>
+                <td>22300</td>
+                <td>20</td>
+                <td>0</td>
+                <td>20</td>
+                <td class="availability available">Available</td>
+            </tr>
+            <tr>
+                <td>73</td>
+                <td>PEJABAT POS SUNGAI BESI</td>
+                <td>57000</td>
+                <td>50</td>
+                <td>1</td>
+                <td>49</td>
+                <td class="availability available">Available</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        function searchTable() {
+            // Declare variables
+            let input, filter, table, tr, td, i, j, txtValue, found;
+            input = document.getElementById("searchBox");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("postOfficeTable");
+            tr = table.getElementsByTagName("tr");
+
+            // Loop through all table rows, and hide those who don't match the search query
+            for (i = 1; i < tr.length; i++) { // Start from 1 to skip header row
+                found = false;
+                // Check all columns except the first one (No)
+                for (j = 1; j < 7; j++) { // Columns 1-6 (Name, Postcode, Capacity, Booked, Available, Availability)
+                    td = tr[i].getElementsByTagName("td")[j];
+                    if (td) {
+                        txtValue = td.textContent || td.innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            found = true;
+                            break;
+                        }
+                    }
+                }
+                if (found) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+</body>
+</html>
